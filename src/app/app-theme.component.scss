@@ -1,0 +1,9 @@
+@import '~@angular/material/theming';
+
+@mixin app-component-theme($theme) {
+  $background: map-get($theme, background);
+
+  .idp-root {
+    background-color: mat-color($background, background) !important;
+  }
+}

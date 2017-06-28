@@ -1,0 +1,21 @@
+<div>
+  <div *ngIf="userList | async as users; else loading">
+    <div *ngFor="let user of users; trackBy: trackByUsers; count as count; index as i">
+      <md-card role="group">
+        <md-card-header>
+          <md-card-title>{{user.name}}</md-card-title>
+          <md-card-subtitle>{{user.username}}</md-card-subtitle>
+          <img md-card-avatar src="/assets/images/default-user.png"/>
+        </md-card-header>
+        <md-card-content>
+          <p>
+            This is <strong>{{i + 1}}th</strong> user of <strong>{{count}}</strong> users.
+          </p>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+  <ng-template #loading>
+    <md-progress-spinner mode="indeterminate"></md-progress-spinner>
+  </ng-template>
+</div>

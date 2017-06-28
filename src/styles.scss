@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  border: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+@import '~@angular/material/theming';
+@import "app/app-theme.component";
+
+@mixin idp-theme($theme) {
+  @include app-component-theme($theme);
+  @include angular-material-theme($theme);
+}
+
+$mat-light-theme-background: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar: map_get($mat-grey, 100),
+  background: map_get($mat-grey, 200),
+  hover: rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+  card: white,
+  dialog: white,
+  disabled-button: $black-12-opacity,
+  raised-button: white,
+  focused-button: $black-6-opacity,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+);
+
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+
+$ideal-app-primary: mat-palette($mat-light-blue);
+$ideal-app-accent: mat-palette($mat-yellow);
+
+// The warn palette is optional (defaults to red).
+$ideal-app-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$ideal-app-theme: mat-light-theme($ideal-app-primary, $ideal-app-accent, $ideal-app-warn);
+
+// Include theme styles for core and each components used in your app.
+// Alternatively, you can import and @include the theme mixins for each components
+// that you are using.
+@include idp-theme($ideal-app-theme);
+
+.default-theme {
+  $ideal-user-primary: mat-palette($mat-indigo);
+  $ideal-user-accent: mat-palette($mat-pink);
+  $ideal-user-warn: mat-palette($mat-red);
+
+  $ideal-user-theme: mat-light-theme($ideal-user-primary, $ideal-user-accent, $ideal-user-warn);
+
+  @include idp-theme($ideal-user-theme);
+}
