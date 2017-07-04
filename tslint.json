@@ -76,7 +76,7 @@
     "prefer-const": true,
     "quotemark": [
       true,
-      "single"
+      ["single", "double"]
     ],
     "radix": true,
     "semicolon": [
@@ -110,13 +110,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "idp",
+      ["idp", "app"],
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "idp",
+      ["idp", "app"],
       "kebab-case"
     ],
     "use-input-property-decorator": true,

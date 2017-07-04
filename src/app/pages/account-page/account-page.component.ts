@@ -1,7 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {UserService} from '../../services/user/user.service';
-import {Observable} from 'rxjs/Observable';
-import {User} from '../../model/user';
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {UserService} from "../../services/user/user.service";
+import {User} from "../../model/user";
+import {MdSnackBar} from "@angular/material";
+import {Router} from "@angular/router";
+import {NavigationService} from "../../core/navigation/navigation.service";
 
 @Component({
   selector: 'idp-account-page',
@@ -10,13 +12,19 @@ import {User} from '../../model/user';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AccountPageComponent implements OnInit {
-  public userList: Observable<User[]>;
-
-  constructor(private userService: UserService) { }
-
-  ngOnInit() {
-    this.userList = this.userService.findAll();
+  constructor(private userService: UserService, private snackBar: MdSnackBar, private navigationService: NavigationService) {
   }
 
-  trackByUsers(index: number, hero: User): number { return hero.id; }
+  ngOnInit() {
+  }
+
+  onUserReady(user: User): void {
+    // TODO implement this method
+  }
+
+  onUserNotFound(user: User): void {
+    this.snackBar.open("Username not found, please register or go back.", undefined, {duration: 3000});
+    this.navigationService.register(user.username).then((value: boolean) => {
+    });
+  }
 }

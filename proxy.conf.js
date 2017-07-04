@@ -1,7 +1,7 @@
 const PROXY_CONFIG = [
   {
     context: [
-      "/auth"
+      "/uaa"
     ],
     target: "http://localhost:9999",
     secure: false

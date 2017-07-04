@@ -1,0 +1,66 @@
+<div [formGroup]="form" fxLayout="column">
+  <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
+    <app-named-avatar fxFlex="none">
+      <app-avatar appNamedAvatarImage style="width: 100px; height: 100px"
+                  [src]="user.profileImage | userProfileImagePipe"></app-avatar>
+      <app-named-avatar-name *ngIf="user.firstName || user.lastName" [@heightAnimation]>
+        {{user.firstName}} {{user.lastName}}
+      </app-named-avatar-name>
+      <app-named-avatar-description *ngIf="user.username" [@heightAnimation]>
+        {{user.username}}
+      </app-named-avatar-description>
+    </app-named-avatar>
+  </div>
+  <div fxFlex="none" fxLayout="row" style="margin-top: 10px;" fxLayoutAlign="space-between">
+    <md-input-container fxFlex="48%">
+      <input formControlName="firstName" mdInput placeholder="FirstName" required/>
+      <md-error>First Name should be provided</md-error>
+    </md-input-container>
+    <md-input-container fxFlex="48%">
+      <input formControlName="lastName" mdInput placeholder="LastName" required/>
+      <md-error>Last Name should be provided</md-error>
+    </md-input-container>
+  </div>
+  <app-confirm-password fxFlex="none" [form]="confirmPasswordFields" [password]="user.password"
+                        (passwordChanged)="user.password = $event"></app-confirm-password>
+  <md-input-container fxFlex="none">
+    <input formControlName="birthday" mdInput placeholder="Birthday" [mdDatepicker]="myDatepicker" required>
+    <button mdSuffix [mdDatepickerToggle]="myDatepicker"></button>
+    <md-error>Birthday should be provided</md-error>
+  </md-input-container>
+  <md-select class="idp-form-control-margin-top" formControlName="gender" fxFlex="none" placeholder="Gender" required>
+    <md-option [value]="genderService.female">
+      Female
+    </md-option>
+    <md-option [value]="genderService.male">
+      Male
+    </md-option>
+    <md-option [value]="genderService.other">
+      Other
+    </md-option>
+    <md-option [value]="genderService.none">
+      Rather not say
+    </md-option>
+  </md-select>
+  <md-select style="margin-top: 25px;" formControlName="country" fxFlex="none" placeholder="Country" required>
+    <md-option *ngFor="let country of countries;trackBy:country?.alpha2Code" [value]="country">
+      <img class="idp-country-flag-icon" [src]="country.flag"/>
+      {{locationService.getCountryName(country)}} ({{country.alpha2Code}})
+    </md-option>
+  </md-select>
+  <div fxLayout="row" class="idp-form-control-margin-top">
+    <md-select formControlName="callingCode" fxFlex="none" placeholder="Code" style="margin-top: 10px;">
+      <md-option *ngFor="let country of countries;trackBy:country?.alpha2Code" [value]="country.callingCodes[0]">
+        <img class="idp-country-flag-icon" [src]="country.flag"/>
+        ({{country.alpha2Code}}) +{{country.callingCodes[0]}}
+      </md-option>
+    </md-select>
+    <div fxFlex="auto" fxFlexOffset="20px">
+      <md-input-container style="width: 100%">
+        <input formControlName="telephone" mdInput placeholder="Telephone">
+        <md-error>This phone number format is not recognized. Please check the country and number.</md-error>
+      </md-input-container>
+    </div>
+  </div>
+</div>
+<md-datepicker [touchUi]="true" #myDatepicker></md-datepicker>

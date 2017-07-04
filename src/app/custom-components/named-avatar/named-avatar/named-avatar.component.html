@@ -1,0 +1,15 @@
+<div fxLayout="column">
+  <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="none">
+      <ng-content select="[appNamedAvatarImage]"></ng-content>
+    </div>
+  </div>
+  <div fxFlex="none">
+    <div>
+      <ng-content select="app-named-avatar-name"></ng-content>
+    </div>
+    <div>
+        <ng-content select="app-named-avatar-description"></ng-content>
+    </div>
+  </div>
+</div>
