@@ -40,4 +40,7 @@ export class PasswordStrengthService {
     }
   }
 
+  toString(passwordStrength: PasswordStrength): string {
+    return PasswordStrength[passwordStrength].toLowerCase();
+  }
 }

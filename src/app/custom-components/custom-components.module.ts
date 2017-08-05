@@ -6,6 +6,7 @@ import {ColorModule} from "./color/color.module";
 import {ConfirmPasswordModule} from "./confirm-password/confirm-password.module";
 import { PasswordStrengthIndicatorModule } from './password-strength-indicator/password-strength-indicator.module';
 import { TelephoneNumberModule } from './telephone-number/telephone-number.module';
+import { FocusModule } from './focus/focus.module';
 
 @NgModule({
   imports: [],
@@ -16,7 +17,8 @@ import { TelephoneNumberModule } from './telephone-number/telephone-number.modul
     ColorModule,
     ConfirmPasswordModule,
     PasswordStrengthIndicatorModule,
-    TelephoneNumberModule
+    TelephoneNumberModule,
+    FocusModule
   ]
 })
 export class CustomComponentsModule {

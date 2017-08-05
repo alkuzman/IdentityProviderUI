@@ -1,12 +1,23 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from "@angular/core";
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit
+} from "@angular/core";
 import {User} from "../../../../model/user";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {GenderService} from "../../../../core/helper/gender/gender.service";
-import {Gender} from "../../../../model/gender.enum";
-import {Country} from "../../../../model/country";
 import {Subscription} from "rxjs/Subscription";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {LocationService} from "../../../../core/location/location.service";
+import {ConfirmPasswordValidators} from "../../../../custom-components/confirm-password/confirm-password.validators";
+import {PasswordStrength} from "../../../../custom-components/password-strength-indicator/password-strength";
+import {PasswordStrengthService} from "../../../../custom-components/password-strength-indicator/password-strength.service";
+import {RegistrationFieldsErrors} from "./registration-fields.errors";
+import {FormUtilsService} from "../../../../core/form-utils/form-utils.service";
 
 @Component({
   selector: 'idp-registration-fields',
@@ -28,108 +39,98 @@ import {LocationService} from "../../../../core/location/location.service";
     ])
   ]
 })
-export class RegistrationFieldsComponent implements OnInit, OnDestroy {
+export class RegistrationFieldsComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input("user") user: User;
   @Input("form") form: FormGroup;
-  confirmPasswordFields: FormGroup;
-  countries: any[] = [];
-  location: any;
-
+  currentForm: FormGroup;
+  // Fields
+  telephoneNumberFields: FormGroup;
+  // Password
+  passwordStrengthShow = false;
+  passwordStrength: PasswordStrength = PasswordStrength.SHORT;
+  // Birthday
+  startDate = new Date(1990, 0, 1);
   // Subscriptions
   subscriptions: Subscription[] = [];
+  // Errors
+  formErrors: RegistrationFieldsErrors = {
+    firstName: 'required',
+    lastName: 'required',
+    password: 'required',
+    confirmPassword: 'required',
+    gender: 'required',
+    birthday: 'required',
+    country: 'required',
+    telephone: ''
+  };
 
-  constructor(private fb: FormBuilder, public genderService: GenderService,
-              public locationService: LocationService, private c: ChangeDetectorRef) {
+  constructor(private fb: FormBuilder,
+              public genderService: GenderService,
+              public locationService: LocationService,
+              private c: ChangeDetectorRef,
+              public passwordStrengthService: PasswordStrengthService) {
   }
 
   ngOnInit() {
-
     // First Name
-    let control: FormControl = this.fb.control(this.user.firstName, [Validators.required]);
-    let subscription: Subscription = control.valueChanges.subscribe((value: string) => {
-      this.user.firstName = value;
-    });
-    this.subscriptions.push(subscription);
-    this.form.addControl("firstName", control);
+    const firstName: FormControl = this.fb.control(this.user.firstName, [Validators.required]);
+    this.form.addControl("firstName", firstName);
 
     // Last Name
-    control = this.fb.control(this.user.lastName, [Validators.required]);
-    subscription = control.valueChanges.subscribe((value: string) => {
-      this.user.lastName = value;
-    });
-    this.subscriptions.push(subscription);
-    this.form.addControl("lastName", control);
+    const lastName: FormControl = this.fb.control(this.user.lastName, [Validators.required]);
+    this.form.addControl("lastName", lastName);
 
-    this.confirmPasswordFields = this.fb.group({});
-    this.form.addControl("confirmPasswordFields", this.confirmPasswordFields);
+    // Password
+    const password: FormControl = this.fb.control(this.user.password, [Validators.required, Validators.minLength(6)]);
+    this.form.addControl("password", password);
+
+    // Confirm Password
+    const confirmPassword: FormControl = this.fb.control(undefined, [Validators.required,
+      ConfirmPasswordValidators.confirmPassword(password)]);
+    this.form.addControl("confirmPassword", confirmPassword);
 
     // Birthday
     const birthday = this.fb.control(undefined, [Validators.required]);
     this.form.addControl("birthday", birthday);
-    subscription = birthday.valueChanges.subscribe((value: Date) => {
-      if (!birthday.errors) {
-        this.user.birthday = value;
-      }
-    });
-    this.subscriptions.push(subscription);
 
     // Gender
-    control = this.fb.control(undefined, [Validators.required]);
-    subscription = control.valueChanges.subscribe((value: Gender) => {
-      this.user.gender = value;
-    });
-    this.form.addControl("gender", control);
-    this.subscriptions.push(subscription);
+    const gender = this.fb.control(undefined, [Validators.required]);
+    this.form.addControl("gender", gender);
 
     // Telephone
-    control = this.fb.control(this.user.telephone, [Validators.pattern(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)]);
-    subscription = control.valueChanges.subscribe((value: string) => {
-      this.user.telephone = value;
-    });
-    this.form.addControl("telephone", control);
-    this.subscriptions.push(subscription);
+    this.telephoneNumberFields = this.fb.group({});
+    this.form.addControl("telephoneNumberFields", this.telephoneNumberFields);
 
     // Country
-    const control2 = this.fb.control(undefined, [Validators.required]);
-    subscription = control2.valueChanges.subscribe((value: any) => {
-      const country: Country = new Country();
-      country.name = this.locationService.getCountryName(value);
-      country.alpha2Code = value.alpha2Code;
-      country.alpha3Code = value.alpha3Code;
-      country.flag = value.flag;
-      country.numericCode = value.numericCode;
-      this.user.country = country;
-    });
-    this.form.addControl("country", control2);
-    this.subscriptions.push(subscription);
-    this.subscriptions.push(this.locationService.countries.subscribe(data => {
-      if (data == null) {
-        return;
-      }
-      this.countries = data;
-    }));
+    const countryControl = this.fb.control(undefined, [Validators.required]);
+    this.form.addControl("country", countryControl);
 
-    // Calling code
-    const callingCode = this.fb.control(undefined, [Validators.required]);
-    subscription = callingCode.valueChanges.subscribe((value: any) => {
-    });
-    this.form.addControl("callingCode", callingCode);
-    this.subscriptions.push(subscription);
-    this.subscriptions.push(this.locationService.countries.subscribe(data => {
-      if (data == null) {
+    // Location Data
+    this.subscriptions.push(this.locationService.location.subscribe((location: any) => {
+      if (location == null) {
         return;
       }
-      this.countries = data;
+      if (this.user.country) {
+        return;
+      }
+      this.user.country = location.alpha2Code;
+      this.c.detectChanges();
     }));
+  }
 
-    this.subscriptions.push(this.locationService.location.subscribe((loc: any) => {
-      if (loc == null) {
-        return;
-      }
-      control2.setValue(loc);
-      callingCode.setValue(loc.callingCodes[0]);
-      this.location = loc;
-    }));
+  ngAfterViewChecked(): void {
+    this.formChanged();
+  }
+
+  formChanged() {
+    if (this.currentForm === this.form) {
+      return;
+    }
+    this.currentForm = this.form;
+    if (this.currentForm) {
+      this.subscriptions.push(this.currentForm.valueChanges
+        .subscribe(data => FormUtilsService.onValueChanged(this.currentForm, this.formErrors)));
+    }
   }
 
   ngOnDestroy() {

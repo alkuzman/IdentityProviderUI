@@ -1,7 +1,7 @@
 /**
  * Created by AKuzmanoski on 04/11/2016.
  */
-import {forwardRef} from "@angular/core";
+import {forwardRef, OnChanges, SimpleChanges} from "@angular/core";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 export abstract class AbstractValueAccessor<T> implements ControlValueAccessor {

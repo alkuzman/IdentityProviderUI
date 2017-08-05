@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output} from "@angular/core";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LocationService} from "../../core/location/location.service";
 import {Subscription} from "rxjs/Subscription";
 
@@ -22,16 +22,19 @@ export class TelephoneNumberComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const callingCode: FormControl = this.fb.control(undefined);
-    this.subscriptions.push(callingCode.valueChanges.subscribe((code: string) => {
-    }));
     this.form.addControl("callingCode", callingCode);
 
-    const telephoneNumber: FormControl = this.fb.control(this.telephoneNumber);
+    const telephoneNumber: FormControl = this.fb.control(this.telephoneNumber,
+      [Validators.pattern(/([0-9\s\-]{7,})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/)]);
     this.subscriptions.push(telephoneNumber.valueChanges.subscribe((number: string) => {
       this.telephoneNumber = number;
-      this.telephoneNumberReady.emit(this.telephoneNumber);
+      this.telephoneNumberReady.emit("+" + callingCode.value + this.telephoneNumber);
     }));
     this.form.addControl("telephoneNumber", telephoneNumber);
+
+    this.subscriptions.push(callingCode.valueChanges.subscribe((code: string) => {
+      this.telephoneNumberReady.emit("+" + code + this.telephoneNumber);
+    }));
 
     this.locationService.countries.subscribe((data: any[]) => {
       if (data == null) {

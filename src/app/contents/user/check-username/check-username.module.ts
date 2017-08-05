@@ -8,6 +8,7 @@ import { UsernameFieldsComponent } from './username-fields/username-fields.compo
 import {NamedAvatarModule} from "../../../custom-components/named-avatar/named-avatar.module";
 import {AvatarModule} from "../../../custom-components/avatar/avatar.module";
 import {UserImagePipesModule} from "../../../custom-pipes/user-image-pipes/user-image-pipes.module";
+import {FocusModule} from "../../../custom-components/focus/focus.module";
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import {UserImagePipesModule} from "../../../custom-pipes/user-image-pipes/user-
     AvatarModule,
     UserImagePipesModule,
     NamedAvatarModule,
+    FocusModule
   ],
   declarations: [CheckUsernameFormComponent, UsernameFormComponent, UsernameFieldsComponent],
   exports: [CheckUsernameFormComponent, UsernameFormComponent, UsernameFieldsComponent]

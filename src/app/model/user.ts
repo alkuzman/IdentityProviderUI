@@ -1,6 +1,5 @@
 import {Role} from "./role.enum";
 import {Gender} from "./gender.enum";
-import {Country} from "./country";
 export class User {
   id: number;
   username: string;
@@ -10,7 +9,7 @@ export class User {
   lastName: string;
   name: string;
   telephone: string;
-  country: Country;
+  country: string;
   role: Role;
   profileImage: string;
   gender: Gender;

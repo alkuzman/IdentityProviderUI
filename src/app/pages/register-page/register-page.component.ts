@@ -1,5 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {ActivatedRoute} from "@angular/router";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'idp-register-page',
@@ -10,9 +11,12 @@ import {ActivatedRoute} from "@angular/router";
 export class RegisterPageComponent implements OnInit {
   username: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private titleService: Title) {
+  }
 
   ngOnInit() {
+    this.titleService.setTitle("ID - Registration");
     this.route.queryParams.subscribe(params => {
       this.username = params["username"];
     })

@@ -7,7 +7,21 @@ import {animate, style, transition, trigger} from "@angular/animations";
   selector: 'app-password-strength-indicator',
   templateUrl: './password-strength-indicator.component.html',
   styleUrls: ['./password-strength-indicator.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger("componentAnimation", [
+      transition(":enter", [
+        style({
+          height: 0,
+          transform: "scale(0)"
+        }),
+        animate("158ms 0ms ease-out", style({height: "*", transform: "scale(1)"}))
+      ]),
+      transition(":leave", [
+        animate("150ms 0ms ease-in", style({height: 0, transform: "scale(0)"}))
+      ])
+    ])
+  ]
 })
 export class PasswordStrengthIndicatorComponent implements OnInit {
   passwordStrength: PasswordStrength;
@@ -22,6 +36,7 @@ export class PasswordStrengthIndicatorComponent implements OnInit {
     }
   }
   @Output("passwordStrengthChange") passwordStrengthChange: EventEmitter<PasswordStrength> = new EventEmitter(true);
+  @HostBinding("@componentAnimation") componentAnimation = true;
 
   constructor(private passwordStrengthService: PasswordStrengthService) { }
 

@@ -3,7 +3,12 @@ import {NewRegistrationFormComponent} from "./new-registration-form/new-registra
 import {SharedModule} from "../../../shared/shared.module";
 import {RegistrationFormComponent} from "./registration-form/registration-form.component";
 import {
-  MdButtonModule, MdDatepickerModule, MdInputModule, MdNativeDateModule, MdSelectModule,
+  MdButtonModule,
+  MdDatepickerModule,
+  MdIconModule,
+  MdInputModule,
+  MdNativeDateModule,
+  MdSelectModule,
   MdSnackBarModule
 } from "@angular/material";
 import {ColorModule} from "../../../custom-components/color/color.module";
@@ -12,6 +17,9 @@ import {NamedAvatarModule} from "../../../custom-components/named-avatar/named-a
 import {AvatarModule} from "../../../custom-components/avatar/avatar.module";
 import {UserImagePipesModule} from "../../../custom-pipes/user-image-pipes/user-image-pipes.module";
 import {ConfirmPasswordModule} from "../../../custom-components/confirm-password/confirm-password.module";
+import {TelephoneNumberModule} from "../../../custom-components/telephone-number/telephone-number.module";
+import {PasswordStrengthIndicatorModule} from "../../../custom-components/password-strength-indicator/password-strength-indicator.module";
+import {FocusModule} from "../../../custom-components/focus/focus.module";
 
 @NgModule({
   imports: [
@@ -26,7 +34,11 @@ import {ConfirmPasswordModule} from "../../../custom-components/confirm-password
     MdDatepickerModule,
     MdNativeDateModule,
     MdSelectModule,
-    ConfirmPasswordModule
+    ConfirmPasswordModule,
+    TelephoneNumberModule,
+    PasswordStrengthIndicatorModule,
+    MdIconModule,
+    FocusModule
   ],
   declarations: [NewRegistrationFormComponent, RegistrationFormComponent, RegistrationFieldsComponent],
   exports: [NewRegistrationFormComponent, RegistrationFormComponent, RegistrationFieldsComponent]

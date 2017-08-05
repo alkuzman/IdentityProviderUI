@@ -12,7 +12,7 @@
     </app-named-avatar>
   </div>
   <md-input-container fxFlex="none" class="username-fields-username margin-top">
-    <input formControlName="username" mdInput placeholder="Email"/>
+    <input appFocus formControlName="username" mdInput placeholder="Email"/>
     <md-error *ngIf="usernameControlError === 'required'">Email should be provided</md-error>
     <md-error *ngIf="usernameControlError === 'email'">Please enter valid email</md-error>
   </md-input-container>

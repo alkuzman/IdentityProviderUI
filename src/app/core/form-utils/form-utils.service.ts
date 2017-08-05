@@ -1,21 +1,35 @@
 import {Injectable} from "@angular/core";
-import {AbstractControl} from "@angular/forms";
+import {AbstractControl, FormGroup} from "@angular/forms";
+import {Properties} from "../helper/properties";
 
 @Injectable()
 export class FormUtilsService {
   static validate(control: AbstractControl) {
+    control.markAsTouched(true);
     if (control.hasOwnProperty('controls')) {
-      control.markAsTouched(true);
       const ctrl = <any>control;
       for (const inner of ctrl.controls) {
         FormUtilsService.validate(ctrl.controls[inner] as AbstractControl);
       }
-    } else {
-      control.markAsTouched(true);
+    }
+  }
+
+  static onValueChanged(form: FormGroup, formErrors: Properties) {
+    if (!form) {
+      return;
+    }
+    for (const field of Object.keys(formErrors)) {
+      // clear previous error message (if any)
+      formErrors[field] = '';
+      const control = form.get(field);
+      if (control && !control.valid) {
+        for (const key of Object.keys(control.errors)) {
+          formErrors[field] = key;
+        }
+      }
     }
   }
 
   constructor() {
   }
-
 }
