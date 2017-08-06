@@ -113,7 +113,7 @@ export class RegistrationFieldsComponent implements OnInit, OnDestroy, AfterView
       if (this.user.country) {
         return;
       }
-      this.user.country = location.alpha2Code;
+      this.user.country = location.alpha3Code;
       this.c.detectChanges();
     }));
   }

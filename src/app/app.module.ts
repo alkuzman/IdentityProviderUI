@@ -10,6 +10,8 @@ import {PageNotFoundComponent} from "./page-not-found/page-not-found.component";
 import {AccountPageModule} from "./pages/account-page/account-page.module";
 import {CoreModule} from "./core/core.module";
 import {RouterModule} from "@angular/router";
+import {HttpClientModule} from '@angular/common/http';
+import {MdProgressBarModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,11 @@ import {RouterModule} from "@angular/router";
   imports: [
     BrowserModule,
     HttpModule,
+    HttpClientModule,
     RouterModule,
     CoreModule,
     ServicesModule,
+    MdProgressBarModule,
     BrowserAnimationsModule,
     AccountPageModule,
     AppRoutingModule

@@ -56,17 +56,18 @@ body {
 
 $mat-light-theme-background: (
   status-bar: map_get($mat-grey, 300),
-  app-bar: map_get($mat-grey, 100),
+  app-bar:    map_get($mat-grey, 100),
   background: map_get($mat-grey, 200),
-  hover: rgba(black, 0.04), // TODO(kara): check style with Material Design UX
-  card: white,
-  dialog: white,
+  hover:      rgba(black, 0.04), // TODO(kara): check style with Material Design UX
+  card:       white,
+  dialog:     white,
   disabled-button: $black-12-opacity,
   raised-button: white,
   focused-button: $black-6-opacity,
   selected-button: map_get($mat-grey, 300),
   selected-disabled-button: map_get($mat-grey, 400),
   disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
 );
 
 // Plus imports for other components in your app.

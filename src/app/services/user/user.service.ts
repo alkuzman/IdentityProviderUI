@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Http, Response} from "@angular/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {User} from "../../model/user";
 import {HttpUtils} from "../../core/http-utils/http-utils.service";
@@ -11,16 +12,15 @@ import {PropertiesToUrlSearchParams} from "../../core/helper/properties-to-url-s
 export class UserService {
   private url = '/uaa/users';
 
-  constructor(private http: Http, private httpUtils: HttpUtils) {
+  constructor(private http: HttpClient, private httpUtils: HttpUtils) {
   }
 
   public findAll(): Observable<User[]> {
-    return this.http.get(this.url).map((response: Response) => HttpUtils.extractData(response));
+    return this.http.get<User[]>(this.url);
   }
 
   public findByUsername(username: string): Observable<User> {
-    const properties: Properties = <Properties>{username: username};
-    const params = PropertiesToUrlSearchParams.transform(properties);
-    return this.http.get(this.url, {search: params}).map((response: Response) => HttpUtils.extractData(response));
+    const params: HttpParams = new HttpParams().set("username", username);
+    return this.http.get<User>(this.url, {params: params});
   }
 }
