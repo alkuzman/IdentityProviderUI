@@ -13,7 +13,8 @@
   </div>
   <div fxFlex="none" fxLayout="row" style="margin-top: 10px;" fxLayoutAlign="space-between">
     <md-input-container fxFlex="48%">
-      <input appFocus formControlName="firstName" mdInput placeholder="FirstName" [(ngModel)]="user.firstName" required/>
+      <input appFocus formControlName="firstName" mdInput placeholder="FirstName" [(ngModel)]="user.firstName"
+             required/>
       <md-error>First Name should be provided</md-error>
       <md-icon mdSuffix>person</md-icon>
     </md-input-container>
@@ -28,27 +29,32 @@
       <md-input-container fxFlex="48%">
         <input mdInput (focus)="passwordStrengthShow = true" (blur)="passwordStrengthShow = false"
                type="password" placeholder="Password" formControlName="password" [(ngModel)]="user.password" required/>
-        <md-hint align="start" *ngIf="passwordStrength !== 0">Your password is {{passwordStrengthService.toString(passwordStrength)}}</md-hint>
+        <md-hint align="start" *ngIf="passwordStrength !== 0">Your password is
+          {{passwordStrengthService.toString(passwordStrength)}}
+        </md-hint>
         <md-error *ngIf="formErrors.password === 'required'">Please enter your password</md-error>
-        <md-error *ngIf="formErrors.password === 'minlength'">Your password should be at least 6 characters long</md-error>
+        <md-error *ngIf="formErrors.password === 'minlength'">Your password should be at least 6 characters long
+        </md-error>
         <md-icon mdSuffix>lock</md-icon>
       </md-input-container>
       <md-input-container fxFlex="48%">
         <input mdInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required/>
         <md-error *ngIf="formErrors.confirmPassword === 'required'">Please confirm your password</md-error>
-        <md-error *ngIf="formErrors.confirmPassword === 'confirmPassword'">Confirm password should match with your password
+        <md-error *ngIf="formErrors.confirmPassword === 'confirmPassword'">Confirm password should match with your
+          password
         </md-error>
         <md-icon mdSuffix>lock</md-icon>
       </md-input-container>
     </div>
-      <app-password-strength-indicator *ngIf="passwordStrengthShow" style="margin-top: 5px;" [password]="user.password" (passwordStrengthChange)="passwordStrength = $event">
-      </app-password-strength-indicator>
+    <app-password-strength-indicator *ngIf="passwordStrengthShow" style="margin-top: 5px;" [password]="user.password"
+                                     (passwordStrengthChange)="passwordStrength = $event">
+    </app-password-strength-indicator>
   </div>
-  <md-input-container fxFlex="none">
+  <md-input-container fxFlex="none" class="full-width">
     <input formControlName="birthday" mdInput placeholder="Birthday" [mdDatepicker]="myDatepicker"
            [(ngModel)]="user.birthday" required>
-    <button mdSuffix [mdDatepickerToggle]="myDatepicker"></button>
-    <md-error>Birthday should be provided</md-error>
+    <mat-datepicker-toggle mdSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+      <md-error>Birthday should be provided</md-error>
   </md-input-container>
   <md-select class="idp-form-control-margin-top" formControlName="gender" fxFlex="none" placeholder="Gender"
              [(ngModel)]="user.gender" required>
@@ -67,13 +73,15 @@
   </md-select>
   <md-select style="margin-top: 25px;" formControlName="country" fxFlex="none" placeholder="Country"
              [(ngModel)]="user.country" required>
-    <md-option *ngFor="let country of locationService.countries | async;trackBy:country?.alpha2Code"
-               [value]="country.alpha2Code">
+    <md-option *ngFor="let country of locationService.countries | async;trackBy:trackByFn"
+               [value]="country.alpha3Code">
       <img class="idp-country-flag-icon" [src]="country.flag"/>
-      {{locationService.getCountryName(country)}} ({{country.alpha2Code}})
+      {{locationService.getCountryName(country)}} <span *ngIf="country.name !== country.nativeName">({{country.nativeName}})</span>
+      ({{country.alpha2Code}})
     </md-option>
   </md-select>
-  <app-telephone-number [form]="telephoneNumberFields" [telephoneNumber]="user.telephone" (telephoneNumberReady)="user.telephone = $event" class="idp-form-control-margin-top">
+  <app-telephone-number [form]="telephoneNumberFields" [telephoneNumber]="user.telephone"
+                        (telephoneNumberReady)="user.telephone = $event" class="idp-form-control-margin-top">
   </app-telephone-number>
 </div>
 <md-datepicker [touchUi]="true" [startAt]="startDate" #myDatepicker></md-datepicker>

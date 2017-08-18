@@ -18,6 +18,7 @@ import {PasswordStrength} from "../../../../custom-components/password-strength-
 import {PasswordStrengthService} from "../../../../custom-components/password-strength-indicator/password-strength.service";
 import {RegistrationFieldsErrors} from "./registration-fields.errors";
 import {FormUtilsService} from "../../../../core/form-utils/form-utils.service";
+import {Country} from "../../../../core/location/country";
 
 @Component({
   selector: 'idp-registration-fields',
@@ -113,7 +114,7 @@ export class RegistrationFieldsComponent implements OnInit, OnDestroy, AfterView
       if (this.user.country) {
         return;
       }
-      this.user.country = location.alpha2Code;
+      this.user.country = location.alpha3Code;
       this.c.detectChanges();
     }));
   }
@@ -138,5 +139,9 @@ export class RegistrationFieldsComponent implements OnInit, OnDestroy, AfterView
       subscription.unsubscribe();
     }
     this.subscriptions = [];
+  }
+
+  trackByFn(index, item: Country) {
+    return item.alpha3Code
   }
 }

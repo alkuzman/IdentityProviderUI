@@ -1,26 +1,27 @@
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs/Observable";
-import {Http, Response} from "@angular/http";
 import {HttpUtils} from "../http-utils/http-utils.service";
 import {BehaviorSubject} from "rxjs/BehaviorSubject";
+import {HttpClient, HttpErrorResponse, HttpEventType, HttpRequest, HttpResponse} from "@angular/common/http";
+import {Country} from "./country";
+import 'rxjs/add/operator/retry';
 
 @Injectable()
 export class LocationService {
-  public countries: BehaviorSubject<any[]> = new BehaviorSubject(undefined);
-  public location: BehaviorSubject<any> = new BehaviorSubject(undefined);
+  public countries: BehaviorSubject<Country[]> = new BehaviorSubject(undefined);
+  public location: BehaviorSubject<Country> = new BehaviorSubject(undefined);
 
 
   private getCurrentIpLocation(): Observable<any> {
-    return this.http.get('http://ipinfo.io')
-      .map(response => HttpUtils.extractData(response));
+    return this.http.get<any>('http://ipinfo.io').retry(3);
   }
 
-  private getCountries(): Observable<any> {
-    return this.http.get("https://restcountries.eu/rest/v2/all").map((response: Response) => HttpUtils.extractData(response));
+  private getCountries(): Observable<Country[]> {
+    return this.http.get<Country[]>("https://restcountries.eu/rest/v2/all").retry(3);
   }
 
-  constructor(private http: Http, private httpUtils: HttpUtils) {
-    this.getCountries().subscribe((cont: any[]) => {
+  constructor(private http: HttpClient, private httpUtils: HttpUtils) {
+    this.getCountries().subscribe((cont: Country[]) => {
       this.countries.next(cont);
       this.getCurrentIpLocation().subscribe((loc: any) => {
         for (const country of cont) {
@@ -29,6 +30,16 @@ export class LocationService {
           }
         }
       });
+    }, (error: HttpErrorResponse) => {
+      if (error.error instanceof Error) {
+        // A client-side or network error occurred. Handle it accordingly.
+        console.log('An error occurred:', error.error.message);
+      } else {
+        // The backend returned an unsuccessful response code.
+        // The response body may contain clues as to what went wrong,
+        console.log(`Backend returned code ${error.status}, body was: ${error.error}`);
+        console.log(error);
+      }
     });
   }
 

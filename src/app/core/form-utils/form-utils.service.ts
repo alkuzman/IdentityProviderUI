@@ -5,11 +5,14 @@ import {Properties} from "../helper/properties";
 @Injectable()
 export class FormUtilsService {
   static validate(control: AbstractControl) {
-    control.markAsTouched(true);
+    control.markAsTouched();
+    control.updateValueAndValidity();
     if (control.hasOwnProperty('controls')) {
       const ctrl = <any>control;
-      for (const inner of ctrl.controls) {
-        FormUtilsService.validate(ctrl.controls[inner] as AbstractControl);
+      for (const inner in ctrl.controls) {
+        if (inner != null) {
+          FormUtilsService.validate(ctrl.controls[inner] as AbstractControl);
+        }
       }
     }
   }
