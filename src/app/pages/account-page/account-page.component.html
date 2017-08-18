@@ -1,7 +1,8 @@
 <app-center-layout>
+  <h1 class="mat-title" style="text-align: center">Login or Register</h1>
   <md-card role="group">
     <md-card-content>
-      <idp-check-username-form (userReady)="onUserReady($event)" (userNotFound)="onUserNotFound($event)"></idp-check-username-form>
+      <idp-check-username-form [username]="username" (userReady)="onContinue($event)"></idp-check-username-form>
     </md-card-content>
   </md-card>
 </app-center-layout>

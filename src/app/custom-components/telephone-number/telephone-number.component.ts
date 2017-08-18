@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnIn
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LocationService} from "../../core/location/location.service";
 import {Subscription} from "rxjs/Subscription";
+import {Country} from "../../core/location/country";
 
 @Component({
   selector: 'app-telephone-number',
@@ -57,5 +58,9 @@ export class TelephoneNumberComponent implements OnInit, OnDestroy {
       subscription.unsubscribe();
     }
     this.subscriptions = [];
+  }
+
+  trackByFn(index, item: Country) {
+    return item.alpha3Code
   }
 }

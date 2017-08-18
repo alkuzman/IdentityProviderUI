@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.js",
+    "start-prod": "ng serve --proxy-config proxy.conf.js --environment=prod --target=production --aot --build-optimizer",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -28,12 +29,12 @@
     "core-js": "*",
     "hammerjs": "*",
     "intl": "*",
-    "rxjs": "^5.4.2",
+    "rxjs": "*",
     "web-animations-js": "*",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "^1.2.7",
+    "@angular/cli": "*",
     "@angular/compiler-cli": "*",
     "@angular/language-service": "*",
     "@angular/platform-server": "*",

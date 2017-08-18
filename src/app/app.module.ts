@@ -1,4 +1,3 @@
-import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
 
 import {AppRoutingModule} from "./app-routing.module";
@@ -11,7 +10,7 @@ import {AccountPageModule} from "./pages/account-page/account-page.module";
 import {CoreModule} from "./core/core.module";
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from '@angular/common/http';
-import {MdProgressBarModule} from "@angular/material";
+import {MdProgressBarModule, MdSnackBarModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -19,14 +18,14 @@ import {MdProgressBarModule} from "@angular/material";
     PageNotFoundComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     HttpClientModule,
     RouterModule,
     CoreModule,
     ServicesModule,
     MdProgressBarModule,
-    BrowserAnimationsModule,
+    MdSnackBarModule,
     AccountPageModule,
     AppRoutingModule
   ],

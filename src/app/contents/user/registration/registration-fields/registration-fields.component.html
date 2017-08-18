@@ -73,7 +73,7 @@
   </md-select>
   <md-select style="margin-top: 25px;" formControlName="country" fxFlex="none" placeholder="Country"
              [(ngModel)]="user.country" required>
-    <md-option *ngFor="let country of locationService.countries | async;trackBy:country?.alpha3Code"
+    <md-option *ngFor="let country of locationService.countries | async;trackBy:trackByFn"
                [value]="country.alpha3Code">
       <img class="idp-country-flag-icon" [src]="country.flag"/>
       {{locationService.getCountryName(country)}} <span *ngIf="country.name !== country.nativeName">({{country.nativeName}})</span>

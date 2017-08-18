@@ -2,10 +2,14 @@
  * Created by AKuzmanoski on 06/08/2017.
  */
 import {Injectable} from "@angular/core";
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {
+  HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpProgressEvent,
+  HttpRequest
+} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do';
 import {LoadingService} from "../loading/loading.service";
+import {HttpUploadProgressEvent} from "@angular/common/http/src/response";
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
@@ -16,10 +20,15 @@ export class LoadingInterceptor implements HttpInterceptor {
     // TODO review this code to see if it is valid.
     this.loadingService.startLoading();
     return next.handle(req).do(event => {
+      if (event.type === HttpEventType.Response) {
+        this.loadingService.endLoading();
+      }
+      if (event.type === HttpEventType.DownloadProgress) {
+        console.log(event);
+      }
     }, error => {
       this.loadingService.endLoading();
     }, () => {
-      this.loadingService.endLoading();
     });
   }
 }
