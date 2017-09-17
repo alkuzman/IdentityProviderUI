@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.js",
+    "start": "ng serve --proxy-config proxy.conf.js --host 0.0.0.0",
     "start-prod": "ng serve --proxy-config proxy.conf.js --environment=prod --target=production --aot --build-optimizer",
     "build": "ng build --prod",
     "test": "ng test",
