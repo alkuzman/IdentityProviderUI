@@ -19,7 +19,7 @@ export class RegistrationGuard implements CanActivate {
 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const username: string = route.queryParamMap.get("username");
+    const username: string = route.queryParamMap.get('username');
     return this.userService.findByUsernameCached(username).map((user: User) => {
       return this.onUsernameExists(route);
     }).catch((err: any, caught: any) => {

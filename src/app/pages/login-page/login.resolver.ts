@@ -16,7 +16,7 @@ export class LoginResolver implements Resolve<User> {
 
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> | Promise<User> | User {
-    const username: string = route.queryParamMap.get("username");
+    const username: string = route.queryParamMap.get('username');
     return this.userService.findByUsernameCached(username).catch((err: any, caught: any) => {
       if (err instanceof HttpErrorResponse && err.status === 404) {
         return this.onUserDoesntExist(route);

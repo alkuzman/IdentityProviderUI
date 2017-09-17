@@ -1,3 +1,16 @@
-<p>
-  {{user | json}}
-</p>
+<form autocomplete="off" [formGroup]="form" novalidate fxLayout="column" (submit)="onSubmit()">
+  <idp-login-fields [user]="user" [form]="fields"></idp-login-fields>
+  <div class="margin-top">
+    <button
+      i18n="button for submitting the login form|Login button. It should be capitalized@@loginFormLoginButton"
+      style="width: 100%" type="submit" md-raised-button color="primary">LOGIN</button>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <a
+      i18n="link for help if user forgotten his password|Link in login form which leads to page for help for users that have forgotten their passwords@@loginFormForgotPasswordLink"
+      md-button color="accent" routerLink="forgotPassword">Forgot password?</a>
+    <a
+      i18n="link for help about how to use the login form|Link in login form which leads to page for help about the login form@@loginFormHelpLink"
+      md-button color="accent" routerLink="help">Help?</a>
+  </div>
+</form>

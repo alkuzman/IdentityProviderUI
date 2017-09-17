@@ -1,9 +1,12 @@
 <form autocomplete="off" [formGroup]="form" novalidate fxLayout="column" (submit)="onSubmit()">
   <idp-username-fields [user]="user" [form]="fields"></idp-username-fields>
   <div class="margin-top">
-    <button style="width: 100%" type="submit" md-raised-button color="primary">{{'Continue' | uppercase }}</button>
+    <button style="width: 100%" type="submit" md-raised-button color="primary"
+            i18n="continue button for processing the form data|A button which continues either on login or register depending on whether the email exists or not. It should be capitalized@@checkUsernameFormContinieButton">CONTINUE</button>
   </div>
-  <div class="margin-top" fxLayout="row" fxLayoutAlign="end">
-    <a [appColor]="'accent'" routerLink="help">Help?</a>
+  <div fxLayout="row" fxLayoutAlign="end">
+    <a md-button
+       i18n="link for help|An link on which user can click and get help which will explan what check username form means@@checkUsernameFormHelpLink"
+       [color]="'accent'" routerLink="help">Help?</a>
   </div>
 </form>

@@ -2,7 +2,7 @@
   <md-select formControlName="callingCode" fxFlex="none" placeholder="Code" style="margin-top: 10px;">
     <md-option *ngFor="let country of countries; trackBy:trackByFn" [value]="country.callingCodes[0]">
       <img class="app-country-flag-icon" [src]="country.flag"/>
-      ({{country.alpha2Code}}) +{{country.callingCodes[0]}}
+      {{country.alpha2Code}} (+{{country.callingCodes[0]}})
     </md-option>
   </md-select>
   <div fxFlex="auto" fxFlexOffset="20px">

@@ -11,9 +11,15 @@
       </app-named-avatar-description>
     </app-named-avatar>
   </div>
-  <md-input-container fxFlex="none" class="username-fields-username margin-top">
-    <input appFocus formControlName="username" mdInput placeholder="Email"/>
-    <md-error *ngIf="usernameControlError === 'required'">Email should be provided</md-error>
-    <md-error *ngIf="usernameControlError === 'email'">Please enter valid email</md-error>
-  </md-input-container>
+  <md-form-field fxFlex="none" class="username-fields-username margin-top">
+    <input formControlName="username" mdInput
+           i18n-placeholder="description of the email field in the check username form|Floating placeholder of the email field, it should be short@@checkUsernameEmailFieldPlaceholder"
+           placeholder="Email" appFocus/>
+    <md-error
+      i18n="error message for empty email|An error message for the email field in the check username form. It should be as descriptive as possible@@checkUsernameEmailFieldNoEmailError"
+      *ngIf="usernameControlError === 'required'">Please enter your email</md-error>
+    <md-error
+      i18n="error message for invalid email|An error message for the email field in the check username form. It should be as descriptive as possible@@checkUsernameEmailFieldInvalidEmailError"
+      *ngIf="usernameControlError === 'email'">Please enter valid email</md-error>
+  </md-form-field>
 </div>

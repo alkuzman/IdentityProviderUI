@@ -12,21 +12,21 @@
     </app-named-avatar>
   </div>
   <div fxFlex="none" fxLayout="row" style="margin-top: 10px;" fxLayoutAlign="space-between">
-    <md-input-container fxFlex="48%">
+    <md-form-field fxFlex="48%">
       <input appFocus formControlName="firstName" mdInput placeholder="FirstName" [(ngModel)]="user.firstName"
              required/>
       <md-error>First Name should be provided</md-error>
       <md-icon mdSuffix>person</md-icon>
-    </md-input-container>
-    <md-input-container fxFlex="48%">
+    </md-form-field>
+    <md-form-field fxFlex="48%">
       <input formControlName="lastName" mdInput placeholder="LastName" [(ngModel)]="user.lastName" required/>
       <md-error>Last Name should be provided</md-error>
       <md-icon mdSuffix>person</md-icon>
-    </md-input-container>
+    </md-form-field>
   </div>
   <div fxFlex="none">
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <md-input-container fxFlex="48%">
+      <md-form-field fxFlex="48%">
         <input mdInput (focus)="passwordStrengthShow = true" (blur)="passwordStrengthShow = false"
                type="password" placeholder="Password" formControlName="password" [(ngModel)]="user.password" required/>
         <md-hint align="start" *ngIf="passwordStrength !== 0">Your password is
@@ -36,26 +36,27 @@
         <md-error *ngIf="formErrors.password === 'minlength'">Your password should be at least 6 characters long
         </md-error>
         <md-icon mdSuffix>lock</md-icon>
-      </md-input-container>
-      <md-input-container fxFlex="48%">
+      </md-form-field>
+      <md-form-field fxFlex="48%">
         <input mdInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required/>
         <md-error *ngIf="formErrors.confirmPassword === 'required'">Please confirm your password</md-error>
         <md-error *ngIf="formErrors.confirmPassword === 'confirmPassword'">Confirm password should match with your
           password
         </md-error>
         <md-icon mdSuffix>lock</md-icon>
-      </md-input-container>
+      </md-form-field>
     </div>
     <app-password-strength-indicator *ngIf="passwordStrengthShow" style="margin-top: 5px;" [password]="user.password"
                                      (passwordStrengthChange)="passwordStrength = $event">
     </app-password-strength-indicator>
   </div>
-  <md-input-container fxFlex="none" class="full-width">
+  <md-form-field fxFlex="none" class="full-width">
     <input formControlName="birthday" mdInput placeholder="Birthday" [mdDatepicker]="myDatepicker"
            [(ngModel)]="user.birthday" required>
     <mat-datepicker-toggle mdSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-      <md-error>Birthday should be provided</md-error>
-  </md-input-container>
+    <md-datepicker [touchUi]="true" [startAt]="startDate" #myDatepicker></md-datepicker>
+    <md-error>Birthday should be provided</md-error>
+  </md-form-field>
   <md-select class="idp-form-control-margin-top" formControlName="gender" fxFlex="none" placeholder="Gender"
              [(ngModel)]="user.gender" required>
     <md-option [value]="genderService.female">
@@ -84,4 +85,3 @@
                         (telephoneNumberReady)="user.telephone = $event" class="idp-form-control-margin-top">
   </app-telephone-number>
 </div>
-<md-datepicker [touchUi]="true" [startAt]="startDate" #myDatepicker></md-datepicker>

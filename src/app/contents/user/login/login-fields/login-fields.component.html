@@ -1,0 +1,21 @@
+<div [formGroup]="form" fxLayout="column">
+  <div fxFlex="none" fxLayout="row" fxLayoutAlign="center">
+    <app-named-avatar fxFlex="none">
+      <app-avatar appNamedAvatarImage style="width: 100px; height: 100px"
+                  [src]="user.profileImage | userProfileImagePipe"></app-avatar>
+      <app-named-avatar-name *ngIf="user.firstName || user.lastName">
+        {{user.firstName}} {{user.lastName}}
+      </app-named-avatar-name>
+      <app-named-avatar-description *ngIf="user.username">
+        {{user.username}}
+      </app-named-avatar-description>
+    </app-named-avatar>
+  </div>
+  <md-form-field fxFlex="none" class="margin-top" style="width: 100%">
+    <input formControlName="password" type="password" mdInput
+           i18n-placeholder="description of the password field|Floating placeholder of the password field in the login form. It should be shot@@loginFieldsPasswordPlaceholder"
+           placeholder="Password" appFocus/>
+    <md-error i18n="error message that tells the user that he should provide a password|Error message which is visible if there is no password entered@@loginFieldsNoPasswordError">
+      Please enter your password</md-error>
+  </md-form-field>
+</div>
