@@ -1,9 +1,9 @@
 <form autocomplete="off" [formGroup]="form" novalidate fxLayout="column" (submit)="onSubmit()">
   <idp-registration-fields [user]="user" [form]="fields"></idp-registration-fields>
   <div style="margin-top: 20px;">
-    <button style="width: 100%" type="submit" md-raised-button color="primary">{{'Register' | uppercase }}</button>
+    <button style="width: 100%" type="submit" mat-raised-button color="primary">{{'Register' | uppercase }}</button>
   </div>
   <div fxLayout="row" fxLayoutAlign="end">
-    <a md-button color="accent" routerLink="help">Help?</a>
+    <a mat-button color="accent" routerLink="help">Help?</a>
   </div>
 </form>

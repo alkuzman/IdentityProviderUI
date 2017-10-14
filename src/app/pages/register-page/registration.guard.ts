@@ -2,19 +2,19 @@
  * Created by AKuzmanoski on 13/08/2017.
  */
 import {Injectable} from '@angular/core';
-import {User} from "../../model/user";
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
-import {Observable} from "rxjs/Observable";
-import {UserService} from "../../services/user/user.service";
+import {User} from '../../model/user';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
+import {UserService} from '../../services/user/user.service';
 import 'rxjs/add/operator/catch';
-import {HttpErrorResponse} from "@angular/common/http";
-import {MdSnackBar} from "@angular/material";
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material';
 
 
 @Injectable()
 export class RegistrationGuard implements CanActivate {
 
-  constructor(private navigation: Router, private userService: UserService, private snackBar: MdSnackBar) {
+  constructor(private navigation: Router, private userService: UserService, private snackBar: MatSnackBar) {
   }
 
 
@@ -31,13 +31,13 @@ export class RegistrationGuard implements CanActivate {
   }
 
   onUsernameExists(route: ActivatedRouteSnapshot): boolean {
-    this.snackBar.open("The username exists. Please login or", "GO BACK", {duration: 10000})
+    this.snackBar.open('The username exists. Please login or', 'GO BACK', {duration: 10000})
       .onAction().subscribe(() => {
       // Give the user chance to go back and try another account
-      this.navigation.navigate(["account"], {queryParams: route.queryParams});
+      this.navigation.navigate(['account'], {queryParams: route.queryParams});
     });
     // Go to login because user already exists
-    this.navigation.navigate(["login"], {queryParams: route.queryParams});
+    this.navigation.navigate(['login'], {queryParams: route.queryParams});
     return false;
   }
 }

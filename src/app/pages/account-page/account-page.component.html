@@ -2,9 +2,9 @@
   <h1
     i18n="describes the purpose of the account page|Header of the account page@@accountPageHeaderDescription"
     class="mat-title" style="text-align: center">Login or Register</h1>
-  <md-card role="group">
-    <md-card-content>
+  <mat-card role="group">
+    <mat-card-content>
       <idp-check-username-form [username]="username" (userReady)="onContinue($event)"></idp-check-username-form>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 </app-center-layout>

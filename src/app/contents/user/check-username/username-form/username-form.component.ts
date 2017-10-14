@@ -1,8 +1,8 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {User} from "../../../../model/user";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MdSnackBar} from "@angular/material";
-import {FormUtilsService} from "../../../../core/form-utils/form-utils.service";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../../../model/user';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
+import {FormUtilsService} from '../../../../core/form-utils/form-utils.service';
 
 @Component({
   selector: 'idp-username-form',
@@ -11,12 +11,12 @@ import {FormUtilsService} from "../../../../core/form-utils/form-utils.service";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsernameFormComponent implements OnInit {
-  @Input("user") user: User;
-  @Output("emailSubmitted") emailSubmitted: EventEmitter<User> = new EventEmitter<User>();
+  @Input('user') user: User;
+  @Output('emailSubmitted') emailSubmitted: EventEmitter<User> = new EventEmitter<User>();
   form: FormGroup;
   fields: FormGroup;
 
-  constructor(private fb: FormBuilder, private snackBar: MdSnackBar) {
+  constructor(private fb: FormBuilder, private snackBar: MatSnackBar) {
     this.fields = this.fb.group({});
     this.form = this.fb.group({
       fields: this.fields
@@ -31,7 +31,7 @@ export class UsernameFormComponent implements OnInit {
       this.emailSubmitted.emit(this.user);
     } else {
       FormUtilsService.validate(this.form);
-      this.snackBar.open("Please enter valid email", undefined, {duration: 3000});
+      this.snackBar.open('Please enter valid email', undefined, {duration: 3000});
     }
   }
 }

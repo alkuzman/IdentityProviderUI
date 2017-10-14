@@ -1,8 +1,9 @@
 /**
  * Created by AKuzmanoski on 07/01/2017.
  */
-import {Injectable} from "@angular/core";
-import {PasswordStrength} from "./password-strength";
+import {Injectable} from '@angular/core';
+import {PasswordStrength} from './password-strength';
+
 @Injectable()
 export class PasswordStrengthService {
   private hasCapitalLetter: RegExp = /.*[A-Z].*/;

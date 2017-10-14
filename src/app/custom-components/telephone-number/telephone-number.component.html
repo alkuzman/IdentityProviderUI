@@ -1,15 +1,17 @@
 <div [formGroup]="form" fxLayout="row">
-  <md-select formControlName="callingCode" fxFlex="none" placeholder="Code" style="margin-top: 10px;">
-    <md-option *ngFor="let country of countries; trackBy:trackByFn" [value]="country.callingCodes[0]">
-      <img class="app-country-flag-icon" [src]="country.flag"/>
-      {{country.alpha2Code}} (+{{country.callingCodes[0]}})
-    </md-option>
-  </md-select>
+  <mat-form-field>
+    <mat-select formControlName="callingCode" fxFlex="none" placeholder="Code">
+      <mat-option *ngFor="let country of countries; trackBy:trackByFn" [value]="country.callingCodes[0]">
+        <img class="app-country-flag-icon" [src]="country.flag"/>
+        {{country.alpha2Code}} (+{{country.callingCodes[0]}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <div fxFlex="auto" fxFlexOffset="20px">
-    <md-input-container style="width: 100%">
-      <input type="tel" formControlName="telephoneNumber" mdInput placeholder="Telephone">
-      <md-error>This phone number format is not recognized.</md-error>
-      <md-icon mdSuffix>phone</md-icon>
-    </md-input-container>
+    <mat-form-field style="width: 100%">
+      <input type="tel" formControlName="telephoneNumber" matInput placeholder="Telephone">
+      <mat-error>This phone number format is not recognized.</mat-error>
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
   </div>
 </div>

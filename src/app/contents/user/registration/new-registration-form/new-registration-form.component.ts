@@ -1,9 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {User} from "../../../../model/user";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {MdSnackBar} from "@angular/material";
-import {ActivatedRoute, ActivatedRouteSnapshot} from "@angular/router";
-import {Role} from "../../../../model/role.enum";
+import {User} from '../../../../model/user';
+import {Role} from '../../../../model/role.enum';
 
 @Component({
   selector: 'idp-new-registration-form',
@@ -12,7 +9,7 @@ import {Role} from "../../../../model/role.enum";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewRegistrationFormComponent implements OnInit {
-  @Input("username") username: string;
+  @Input('username') username: string;
   user: User;
 
   constructor() {
@@ -25,5 +22,6 @@ export class NewRegistrationFormComponent implements OnInit {
     this.user.role = Role.USER;
   }
 
-  onSubmit(user: User): void {}
+  onSubmit(user: User): void {
+  }
 }

@@ -2,7 +2,6 @@ import {ApplicationRef, ComponentFactoryResolver, EventEmitter, Injectable, Inje
 import {Observable} from 'rxjs/Observable';
 import {TimerObservable} from 'rxjs/observable/TimerObservable';
 import {ComponentPortal, DomPortalHost} from '@angular/cdk/portal';
-import {MdProgressBar} from '@angular/material';
 import {LoadingComponent} from './loading.component';
 
 @Injectable()
@@ -10,15 +9,14 @@ export class LoadingService {
   private loading = false;
   private numberOfLoading = 0;
   private delay = 100;
-  private _state: EventEmitter<boolean> = new EventEmitter(true);
-
-  // 1. Reference to our Portal.
   //    This is the portal we'll use to attach our LoadingSpinnerComponent.
   private loadingSpinnerPortal: ComponentPortal<LoadingComponent>;
 
-  // 2. Reference to our Portal Host.
+  // 1. Reference to our Portal.
   //    We use DOMPortalHost as we'll be using document.body as our anchor.
   private bodyPortalHost: DomPortalHost;
+
+  // 2. Reference to our Portal Host.
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private appRef: ApplicationRef,
@@ -34,6 +32,8 @@ export class LoadingService {
       this.appRef,
       this.injector);
   }
+
+  private _state: EventEmitter<boolean> = new EventEmitter(true);
 
   public get state(): Observable<boolean> {
     return this._state;

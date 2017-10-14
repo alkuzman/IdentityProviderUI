@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FocusDirective } from './focus.directive';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FocusDirective} from './focus.directive';
 
 @NgModule({
   imports: [
@@ -9,4 +9,5 @@ import { FocusDirective } from './focus.directive';
   declarations: [FocusDirective],
   exports: [FocusDirective]
 })
-export class FocusModule { }
+export class FocusModule {
+}

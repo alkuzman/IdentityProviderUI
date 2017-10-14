@@ -1,17 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TelephoneNumberComponent } from './telephone-number.component';
-import {SharedModule} from "../../shared/shared.module";
-import {MdIconModule, MdInputModule, MdSelectModule} from "@angular/material";
+import {NgModule} from '@angular/core';
+import {TelephoneNumberComponent} from './telephone-number.component';
+import {SharedModule} from '../../shared/shared.module';
+import {MatIconModule, MatInputModule, MatSelectModule} from '@angular/material';
 
 @NgModule({
   imports: [
     SharedModule,
-    MdSelectModule,
-    MdInputModule,
-    MdIconModule
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule
   ],
   declarations: [TelephoneNumberComponent],
   exports: [TelephoneNumberComponent]
 })
-export class TelephoneNumberModule { }
+export class TelephoneNumberModule {
+}

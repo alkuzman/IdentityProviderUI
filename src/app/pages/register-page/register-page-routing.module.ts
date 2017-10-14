@@ -1,14 +1,12 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {RegisterPageComponent} from "./register-page.component";
-import {IsUsernamePresentGuard} from "../../core/guards/is-username-present.guard";
-import {IsAccountCheckedGuard} from "../../core/guards/is-account-checked.guard";
-import {RegistrationGuard} from "./registration.guard";
-import {MdSnackBarModule} from "@angular/material";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {RegisterPageComponent} from './register-page.component';
+import {IsUsernamePresentGuard} from '../../core/guards/is-username-present.guard';
+import {RegistrationGuard} from './registration.guard';
 
 const routes: Routes = [
   {
-    path: "",
+    path: '',
     component: RegisterPageComponent,
     canActivate: [IsUsernamePresentGuard, RegistrationGuard]
   }
@@ -19,4 +17,5 @@ const routes: Routes = [
   providers: [RegistrationGuard],
   exports: [RouterModule]
 })
-export class RegisterPageRoutingModule { }
+export class RegisterPageRoutingModule {
+}

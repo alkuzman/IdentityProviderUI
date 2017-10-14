@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ColorDirective } from './color.directive';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ColorDirective} from './color.directive';
 
 @NgModule({
   imports: [
@@ -9,4 +9,5 @@ import { ColorDirective } from './color.directive';
   declarations: [ColorDirective],
   exports: [ColorDirective]
 })
-export class ColorModule { }
+export class ColorModule {
+}

@@ -12,76 +12,81 @@
     </app-named-avatar>
   </div>
   <div fxFlex="none" fxLayout="row" style="margin-top: 10px;" fxLayoutAlign="space-between">
-    <md-form-field fxFlex="48%">
-      <input appFocus formControlName="firstName" mdInput placeholder="FirstName" [(ngModel)]="user.firstName"
+    <mat-form-field fxFlex="48%">
+      <input appFocus formControlName="firstName" matInput placeholder="FirstName" [(ngModel)]="user.firstName"
              required/>
-      <md-error>First Name should be provided</md-error>
-      <md-icon mdSuffix>person</md-icon>
-    </md-form-field>
-    <md-form-field fxFlex="48%">
-      <input formControlName="lastName" mdInput placeholder="LastName" [(ngModel)]="user.lastName" required/>
-      <md-error>Last Name should be provided</md-error>
-      <md-icon mdSuffix>person</md-icon>
-    </md-form-field>
+      <mat-error>First Name should be provided</mat-error>
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+    <mat-form-field fxFlex="48%">
+      <input formControlName="lastName" matInput placeholder="LastName" [(ngModel)]="user.lastName" required/>
+      <mat-error>Last Name should be provided</mat-error>
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
   </div>
   <div fxFlex="none">
     <div fxLayout="row" fxLayoutAlign="space-between">
-      <md-form-field fxFlex="48%">
-        <input mdInput (focus)="passwordStrengthShow = true" (blur)="passwordStrengthShow = false"
+      <mat-form-field fxFlex="48%">
+        <input matInput (focus)="passwordStrengthShow = true" (blur)="passwordStrengthShow = false"
                type="password" placeholder="Password" formControlName="password" [(ngModel)]="user.password" required/>
-        <md-hint align="start" *ngIf="passwordStrength !== 0">Your password is
+        <mat-hint align="start" *ngIf="passwordStrength !== 0">Your password is
           {{passwordStrengthService.toString(passwordStrength)}}
-        </md-hint>
-        <md-error *ngIf="formErrors.password === 'required'">Please enter your password</md-error>
-        <md-error *ngIf="formErrors.password === 'minlength'">Your password should be at least 6 characters long
-        </md-error>
-        <md-icon mdSuffix>lock</md-icon>
-      </md-form-field>
-      <md-form-field fxFlex="48%">
-        <input mdInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required/>
-        <md-error *ngIf="formErrors.confirmPassword === 'required'">Please confirm your password</md-error>
-        <md-error *ngIf="formErrors.confirmPassword === 'confirmPassword'">Confirm password should match with your
+        </mat-hint>
+        <mat-error *ngIf="formErrors.password === 'required'">Please enter your password</mat-error>
+        <mat-error *ngIf="formErrors.password === 'minlength'">Your password should be at least 6 characters long
+        </mat-error>
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
+      <mat-form-field fxFlex="48%">
+        <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required/>
+        <mat-error *ngIf="formErrors.confirmPassword === 'required'">Please confirm your password</mat-error>
+        <mat-error *ngIf="formErrors.confirmPassword === 'confirmPassword'">Confirm password should match with your
           password
-        </md-error>
-        <md-icon mdSuffix>lock</md-icon>
-      </md-form-field>
+        </mat-error>
+        <mat-icon matSuffix>lock</mat-icon>
+      </mat-form-field>
     </div>
     <app-password-strength-indicator *ngIf="passwordStrengthShow" style="margin-top: 5px;" [password]="user.password"
                                      (passwordStrengthChange)="passwordStrength = $event">
     </app-password-strength-indicator>
   </div>
-  <md-form-field fxFlex="none" class="full-width">
-    <input formControlName="birthday" mdInput placeholder="Birthday" [mdDatepicker]="myDatepicker"
+  <mat-form-field fxFlex="none" class="full-width">
+    <input formControlName="birthday" matInput placeholder="Birthday" [matDatepicker]="myDatepicker"
            [(ngModel)]="user.birthday" required>
-    <mat-datepicker-toggle mdSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-    <md-datepicker [touchUi]="true" [startAt]="startDate" #myDatepicker></md-datepicker>
-    <md-error>Birthday should be provided</md-error>
-  </md-form-field>
-  <md-select class="idp-form-control-margin-top" formControlName="gender" fxFlex="none" placeholder="Gender"
-             [(ngModel)]="user.gender" required>
-    <md-option [value]="genderService.female">
-      Female
-    </md-option>
-    <md-option [value]="genderService.male">
-      Male
-    </md-option>
-    <md-option [value]="genderService.other">
-      Other
-    </md-option>
-    <md-option [value]="genderService.none">
-      Rather not say
-    </md-option>
-  </md-select>
-  <md-select style="margin-top: 25px;" formControlName="country" fxFlex="none" placeholder="Country"
-             [(ngModel)]="user.country" required>
-    <md-option *ngFor="let country of locationService.countries | async;trackBy:trackByFn"
-               [value]="country.alpha3Code">
-      <img class="idp-country-flag-icon" [src]="country.flag"/>
-      {{locationService.getCountryName(country)}} <span *ngIf="country.name !== country.nativeName">({{country.nativeName}})</span>
-      ({{country.alpha2Code}})
-    </md-option>
-  </md-select>
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker [touchUi]="true" [startAt]="startDate" #myDatepicker></mat-datepicker>
+    <mat-error>Birthday should be provided</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="gender" fxFlex="none" placeholder="Gender"
+                [(ngModel)]="user.gender" required>
+      <mat-option [value]="genderService.female">
+        Female
+      </mat-option>
+      <mat-option [value]="genderService.male">
+        Male
+      </mat-option>
+      <mat-option [value]="genderService.other">
+        Other
+      </mat-option>
+      <mat-option [value]="genderService.none">
+        Rather not say
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select formControlName="country" fxFlex="none" placeholder="Country"
+                [(ngModel)]="user.country" required>
+      <mat-option *ngFor="let country of locationService.countries | async;trackBy:trackByFn"
+                  [value]="country.alpha3Code">
+        <img class="idp-country-flag-icon" [src]="country.flag"/>
+        {{locationService.getCountryName(country)}} <span *ngIf="country.name !== country.nativeName">({{country.nativeName}})</span>
+        ({{country.alpha2Code}})
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix>location_on</mat-icon>
+  </mat-form-field>
   <app-telephone-number [form]="telephoneNumberFields" [telephoneNumber]="user.telephone"
-                        (telephoneNumberReady)="user.telephone = $event" class="idp-form-control-margin-top">
+                        (telephoneNumberReady)="user.telephone = $event">
   </app-telephone-number>
 </div>

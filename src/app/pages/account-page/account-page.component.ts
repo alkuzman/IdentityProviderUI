@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
-import {User} from "../../model/user";
-import {MdSnackBar} from "@angular/material";
-import {NavigationService} from "../../core/navigation/navigation.service";
-import {Title} from "@angular/platform-browser";
-import {ActivatedRoute, ParamMap} from "@angular/router";
-import {HttpErrorResponse} from "@angular/common/http";
-import {IsAccountCheckedGuard} from "../../core/guards/is-account-checked.guard";
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {User} from '../../model/user';
+import {MatSnackBar} from '@angular/material';
+import {NavigationService} from '../../core/navigation/navigation.service';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {IsAccountCheckedGuard} from '../../core/guards/is-account-checked.guard';
 
 @Component({
   selector: 'idp-account-page',
@@ -16,7 +16,7 @@ import {IsAccountCheckedGuard} from "../../core/guards/is-account-checked.guard"
 export class AccountPageComponent implements OnInit {
   public username: string;
 
-  constructor(private snackBar: MdSnackBar,
+  constructor(private snackBar: MatSnackBar,
               private navigationService: NavigationService,
               private titleService: Title,
               private route: ActivatedRoute,
@@ -24,9 +24,9 @@ export class AccountPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("ID - Check Account");
+    this.titleService.setTitle('ID - Check Account');
     this.route.queryParamMap.subscribe((value: ParamMap) => {
-      this.username = value.get("username");
+      this.username = value.get('username');
     })
   }
 
@@ -65,7 +65,7 @@ export class AccountPageComponent implements OnInit {
    */
   register(user: User): void {
     // Tell the user why he would be redirected to register page
-    this.snackBar.open("Username not found, please register or go back.", undefined, {duration: 3000});
+    this.snackBar.open('Username not found, please register or go back.', undefined, {duration: 3000});
     // Redirect the user to the register page
     this.navigationService.register(user.username).then((value: boolean) => {
     });

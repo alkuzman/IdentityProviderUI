@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {User} from "../../../../model/user";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {transition, trigger} from "@angular/animations";
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
+import {User} from '../../../../model/user';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'idp-login-fields',
@@ -10,14 +9,15 @@ import {transition, trigger} from "@angular/animations";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFieldsComponent implements OnInit {
-  @Input("user") user: User;
-  @Input("form") form: FormGroup;
+  @Input('user') user: User;
+  @Input('form') form: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {
+  }
 
   ngOnInit() {
-    const password: FormControl = this.formBuilder.control("", [Validators.required]);
-    this.form.addControl("password", password);
+    const password: FormControl = this.formBuilder.control('', [Validators.required]);
+    this.form.addControl('password', password);
   }
 
 }

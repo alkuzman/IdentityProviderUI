@@ -10,14 +10,14 @@ import {LoadingInterceptor} from './http-interceptors/loading.interceptor';
 import {LoadingService} from './loading/loading.service';
 import {IsUsernamePresentGuard} from './guards/is-username-present.guard';
 import {IsAccountCheckedGuard} from './guards/is-account-checked.guard';
-import {MdProgressBarModule} from '@angular/material';
+import {MatProgressBarModule} from '@angular/material';
 import {LoadingComponent} from './loading/loading.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    MdProgressBarModule
+    MatProgressBarModule
   ],
   declarations: [LoadingComponent],
   providers: [HttpUtils, FormUtilsService, NavigationService, GenderService, LocationService, LoadingService, {
@@ -27,4 +27,5 @@ import {LoadingComponent} from './loading/loading.component';
   }, IsUsernamePresentGuard, IsAccountCheckedGuard],
   entryComponents: [LoadingComponent]
 })
-export class CoreModule { }
+export class CoreModule {
+}

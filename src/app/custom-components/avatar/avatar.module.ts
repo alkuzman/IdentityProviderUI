@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {SharedModule} from "../../shared/shared.module";
-import { AvatarComponent } from './avatar.component';
+import {NgModule} from '@angular/core';
+import {SharedModule} from '../../shared/shared.module';
+import {AvatarComponent} from './avatar.component';
 
 @NgModule({
   imports: [
@@ -10,4 +9,5 @@ import { AvatarComponent } from './avatar.component';
   declarations: [AvatarComponent],
   exports: [AvatarComponent]
 })
-export class AvatarModule { }
+export class AvatarModule {
+}

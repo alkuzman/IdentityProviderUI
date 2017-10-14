@@ -1,6 +1,6 @@
-import {Directive, forwardRef, Input, OnChanges, SimpleChanges} from "@angular/core";
-import {AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn} from "@angular/forms";
-import {ConfirmPasswordValidators} from "./confirm-password.validators";
+import {Directive, forwardRef, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn} from '@angular/forms';
+import {ConfirmPasswordValidators} from './confirm-password.validators';
 
 export const CONFIRM_PASSWORD_VALIDATOR: any = {
   provide: NG_VALIDATORS,
@@ -15,10 +15,9 @@ export const CONFIRM_PASSWORD_VALIDATOR: any = {
 })
 export class ConfirmPasswordDirective implements Validator,
   OnChanges {
+  @Input() appConfirmPassword: AbstractControl;
   private _validator: ValidatorFn;
   private _onChange: () => void;
-
-  @Input() appConfirmPassword: AbstractControl;
 
   constructor() {
   }

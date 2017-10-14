@@ -1,10 +1,11 @@
-import { Directive } from '@angular/core';
+import {Directive} from '@angular/core';
 
 @Directive({
   selector: '[appNamedAvatarImage]'
 })
 export class NamedAvatarImageDirective {
 
-  constructor() { }
+  constructor() {
+  }
 
 }

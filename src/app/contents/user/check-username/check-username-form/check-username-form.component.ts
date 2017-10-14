@@ -1,5 +1,5 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {User} from "../../../../model/user";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../../../model/user';
 
 @Component({
   selector: 'idp-check-username-form',
@@ -8,9 +8,9 @@ import {User} from "../../../../model/user";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckUsernameFormComponent implements OnInit {
-  @Input("username") username: string;
+  @Input('username') username: string;
   user: User = new User();
-  @Output("userReady") userReady: EventEmitter<User> = new EventEmitter<User>();
+  @Output('userReady') userReady: EventEmitter<User> = new EventEmitter<User>();
 
   constructor() {
   }

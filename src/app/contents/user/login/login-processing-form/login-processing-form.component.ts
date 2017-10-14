@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../../../model/user";
+import {User} from '../../../../model/user';
 
 @Component({
   selector: 'idp-login-processing-form',
@@ -7,9 +7,10 @@ import {User} from "../../../../model/user";
   styleUrls: ['./login-processing-form.component.scss']
 })
 export class LoginProcessingFormComponent implements OnInit {
-  @Input("user") user: User;
+  @Input('user') user: User;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

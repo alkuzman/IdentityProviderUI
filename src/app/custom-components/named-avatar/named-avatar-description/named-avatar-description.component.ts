@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-named-avatar-description',
@@ -7,7 +7,7 @@ import {ChangeDetectionStrategy, Component, HostBinding, OnInit} from "@angular/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NamedAvatarDescriptionComponent implements OnInit {
-  @HostBinding("class.mat-caption") matCaptionClass = true;
+  @HostBinding('class.mat-caption') matCaptionClass = true;
 
   constructor() {
   }

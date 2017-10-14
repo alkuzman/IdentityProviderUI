@@ -1,9 +1,6 @@
-import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output,
-  ViewEncapsulation
-} from '@angular/core';
-import {User} from "../../../../model/user";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {User} from '../../../../model/user';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'idp-login-form',
@@ -12,8 +9,8 @@ import {FormBuilder, FormGroup} from "@angular/forms";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent implements OnInit {
-  @Input("user") user: User;
-  @Output("userReady") userReady: EventEmitter<User> = new EventEmitter();
+  @Input('user') user: User;
+  @Output('userReady') userReady: EventEmitter<User> = new EventEmitter();
   public form: FormGroup;
   public fields: FormGroup
 
